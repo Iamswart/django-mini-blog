@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+{% block content%}
+    <h1 class="text-center mb-3">Welcome to <em>Swart Blog</em></h1>
+    <p class="text-center mb-3">A very basic blogging website developed with Django</p>
+    <div class="card mb-3">
+    <div class="card-body">
+    <h2>Dynamic content</h2>
+    <p>The Blog has the following record counts:</p>
+    <ul>
+        <li><strong>Blog Post:</strong> {{ num_blogpost }}</li>
+        <li><strong>Authors:</strong> {{ num_author }}</li>
+        <li><strong>Categories:</strong> {{ num_category }}</li>
+    </ul>
+    <p>You have visited this page {{ num_visits }} time{% if num_visits > 1 %}s{% endif %}.</p>
+    </div>
+    </div>
+{% endblock %}

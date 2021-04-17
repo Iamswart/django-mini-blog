@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="heading-block center">
+        <h1 style="margin-bottom: 20px;">{{ author }}</h1>
+        {% if perms.catalog.can_create_author %}
+            <a href="{% url 'author-update' author.id %}" class="btn btn-primary btn-sm">Update Author</a>
+            <a href="{% url 'author-delete' author.id %}" class="btn btn-danger btn-sm">Delete Author</a>
+        {% endif %}
+    </div>
+    <div class="row justify-content-center col-mt-500" style="margin-top: 10px;">
+        
+        <img  src="{{ author.picture.url }}" alt="Author's picture" style="width:355px;height:340px;">
+        <h4>Blog Post</h4>
+        <dl>
+        {% for blogpost in author.blogpost_set.all %}
+        <dt><a href="{% url 'blogpost-detail' blogpost.pk %}">{{blogpost.title}}</a></dt>
+        {% endfor %}
+        </dl>
+    </div>
+</div>
+
+{% endblock %}

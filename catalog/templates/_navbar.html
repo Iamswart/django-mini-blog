@@ -1,0 +1,42 @@
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div class="container">
+    <a id="name" class="navbar-brand " href="{% url 'index' %}">Swart Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarResponsive">
+        <ul class="navbar-nav">
+          <li class="nav-item ">
+            <a class="nav-link " href="{% url 'blogposts' %}">All Post</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link " href="{% url 'authors'%}">All Authors</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'categories' %}">All Categories</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-link">User: {{ user.get_username }}</li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item ">
+                <a class="nav-link " href="{% url 'login'%}?next={{request.path}}">Log in</a>
+                </li>
+            {% endif %}
+            {% if perms.catalog.can_create_author %}
+                <li class="nav-item ">
+                <a class="nav-link " href="{% url 'author-create' %}">Create Author</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link " href="{% url 'blogpost-create' %}">Create Blog</a>
+                </li>
+            {% endif %}
+        </ul>
+
+      </div>
+    </div>
+</nav>

@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1 class="text-center mb-3">Authors' List</h1>
+    {% if  author_list %}
+    <ul class="list-group mb-4">
+        {% for author in author_list %}
+            <li class="list-group-item">
+                <a href="{{ author.get_absolute_url }}">{{ author }}</a> 
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>There are no authors'</p>
+    {% endif %}
+{% endblock %}
