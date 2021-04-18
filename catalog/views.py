@@ -88,7 +88,7 @@ class AuthorUpdate(PermissionRequiredMixin, UpdateView):
 
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model = Author
-    success_url = reverse_lazy('author')
+    success_url = reverse_lazy('authors')
     permission_required = 'catalog.can_create_author'
         
 class BlogpostCreate(PermissionRequiredMixin, CreateView):
