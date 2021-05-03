@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
+from . import views as catalog_views
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -17,5 +20,6 @@ urlpatterns = [
     path('blogpost/create/', views.BlogpostCreate.as_view(), name='blogpost-create'),
     path('blogpost/<int:pk>/update/', views.BlogpostUpdate.as_view(), name='blogpost-update'),
     path('blogpost/<int:pk>/delete/', views.BlogpostDelete.as_view(), name='blogpost-delete'),
+    url(r'^signup/$', catalog_views.signup, name='signup'),
 ]
 

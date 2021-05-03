@@ -9,6 +9,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
 def index(request):
     num_blogpost = Blogpost.objects.all().count()
@@ -107,10 +110,21 @@ class BlogpostDelete(PermissionRequiredMixin, DeleteView):
     permission_required = 'catalog.can_create_author'
 
     
-                
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
         
         
-        
-        
-        
+
+
 
